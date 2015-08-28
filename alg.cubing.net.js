@@ -63,6 +63,8 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     $scope.clear();
   }
 
+
+  // 生成list的函数
   function initParameter(param, fallback, list) {
     var obj = indexBy(list, "id");
     $scope[param] = obj[search[param]] || obj[fallback];
@@ -72,7 +74,7 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     param_defaults[param] = obj[fallback];
   }
 
-
+  // 设置魔方种类
   initParameter("puzzle", "3x3x3", [
     {id: "2x2x2", name: "2x2x2", group: "Cube", dimension: 2},
     {id: "3x3x3", name: "3x3x3", group: "Cube", dimension: 3},
@@ -86,8 +88,9 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     {id: "1x1x1", name: "1x1x1", group: "Fun", dimension: 1},
   ]);
 
+  //设置显示方式的内容
   initParameter("stage", "full", [
-    {"id": "full", name: "Full", group: "Stage"},
+    {"id": "full", name: "全部可见", group: "Stage"},
     {"id": "PLL", name: "PLL", group: "Fridrich"},
     {"id": "OLL", name: "OLL", group: "Fridrich"},
     {"id": "LL", name: "LL", group: "Fridrich"},
@@ -96,38 +99,40 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     {"id": "ELS", name: "ELS", group: "MGLS"},
     {"id": "L6E", name: "L6E", group: "Roux"},
     {"id": "WV", name: "WV", group: "Variation"},
-    {"id": "void", name: "Void Cube", group: "Puzzle"},
+    {"id": "void", name: "空心魔方", group: "Puzzle"},
   ]);
 
-  initParameter("type", "moves", [
-    {
-      id: "moves",
-      name: "Moves",
-      group: "Start from Setup",
-      setup: "Setup",
-      alg: "Moves",
-      type: "generator",
-      setup_moves: "setup moves",
-      alg_moves: "moves",
-      reconstruction: false
-    },
+  //设置动作方式
+  initParameter("type", "reconstruction", [
+
     {
       id: "reconstruction",
-      name: "Reconstruction",
-      group: "Start from Setup",
-      setup: "Scramble",
-      alg: "Solve",
+      name: "重建(根据打乱写解法)",
+      //group: "Start from Setup", 这里移除了第一级目录
+      setup: "打乱Scramble",  //提示信息
+      alg: "解法",    //提示信息
       type: "generator",
       setup_moves: "scramble moves",
       alg_moves: "reconstruction moves",
       reconstruction: true
     },
     {
+      id: "moves",
+      name: "移动",
+      //group: "Start from Setup", 这里移除了第一级目录
+      setup: "设置Setup",
+      alg: "移动",
+      type: "generator",
+      setup_moves: "setup moves",
+      alg_moves: "moves",
+      reconstruction: false
+    },
+    {
       id: "alg",
-      name: "Algorithm",
-      group: "End Solved / End with Setup",
-      setup: "Setup",
-      alg: "Algorithm",
+      name: "计算(最终态为打乱效果)",
+      //group: "End Solved / End with Setup",
+      setup: "设置Setup",
+      alg: "计算",
       type: "solve",
       setup_moves: "setup moves for end position",
       alg_moves: "algorithm moves",
@@ -135,10 +140,10 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     },
     {
       id: "reconstruction-end-with-setup",
-      name: "Reconstruction (no scramble)",
-      group: "End Solved / End with Setup",
-      setup: "Setup",
-      alg: "Solve",
+      name: "重建(最终态为打乱效果)",
+      //group: "End Solved / End with Setup",
+      setup: "设置Setup",
+      alg: "计算",
       type: "solve",
       setup_moves: "setup moves for end position",
       alg_moves: "reconstruction moves",
@@ -146,11 +151,11 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     }
   ]);
 
-  // TODO: BOY/Japanese translations.
+  // 设置魔方配色
   initParameter("scheme", "boy", [
-    {id: "boy", name: "BOY", type: "Color Scheme", scheme: "grobyw", display: "BOY", custom: false},
-    {id: "japanese", name: "Japanese", type: "Color Scheme", scheme: "groybw", display: "Japanese", custom: false},
-    {id: "custom", name: "Custom:", type: "Color Scheme", scheme: "grobyw", display: "", custom: true}
+    {id: "boy", name: "标准", type: "Color Scheme", scheme: "grobyw", display: "BOY", custom: false},
+    {id: "japanese", name: "日式", type: "Color Scheme", scheme: "groybw", display: "Japanese", custom: false},
+    {id: "custom", name: "自定义", type: "Color Scheme", scheme: "grobyw", display: "", custom: true}
   ]);
   $scope.custom_scheme = "";
 
@@ -161,9 +166,12 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
   $scope.algStatus = "valid";
   $scope.hint_stickers = true;
 
+
+  // 切换视角的3种状态，改成了2种状态
   initParameter("view", "editor", [
-    {id:     "editor", next:   "playback", fullscreen: false, infoPane:  true, extraControls:  true, highlightMoveFields:  true},
-    {id:   "playback", next: "fullscreen", fullscreen: false, infoPane:  true, extraControls: false, highlightMoveFields: false},
+    //{id:     "editor", next:   "playback", fullscreen: false, infoPane:  true, extraControls:  true, highlightMoveFields:  true},
+    //{id:   "playback", next: "fullscreen", fullscreen: false, infoPane:  true, extraControls: false, highlightMoveFields: false},
+    {id:     "editor", next:   "fullscreen", fullscreen: false, infoPane:  true, extraControls:  true, highlightMoveFields:  true},
     {id: "fullscreen", next:     "editor", fullscreen:  true, infoPane: false, extraControls: false, highlightMoveFields: false}
   ]);
 
@@ -173,6 +181,8 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     $scope.title = search["title"];
   }
 
+
+  //切换视角的函数
   $scope.nextView = function() {
     // TODO: Is there a better way to do view cycling?
     var idx = $scope.view_list.indexOf($scope.view);

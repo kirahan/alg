@@ -74,7 +74,7 @@ twisty.scene = function(options) {
     moveList: [],
 
     time: null,
-    position: null,
+    position: null
   }
 
   var view = {

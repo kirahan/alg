@@ -1,12 +1,16 @@
-<html data-ng-app="algxApp" data-ng-controller="algxController">
+<!DOCTYPE html>
+<html data-ng-app="algxApp" data-ng-controller="algxController"  lang="zh-cn">
 <head>
 
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-  <meta name="viewport" content="minimal-ui" />
+  <!-- import bootstrap-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
 
-  <title data-ng-bind="alg | title:title">alg.cubing.net</title>
 
-  <meta property="og:image" content="http://alg.cubing.net/social-media-image.png" />
+  <title >zhTimer--动画生成插件</title>
+
+
 
   <link rel="search" type="application/opensearchdescription+xml" href="searchDescription.xml" title="alg.cubing.net"/>
 
@@ -16,6 +20,8 @@
 
   <!-- twisty.js libraries and code -->
   <script src="twisty.js/lib/jquery-1.11.0.min.js"></script>
+  <!--// add by kira-->
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
   <script src="twisty.js/lib/Three.js"></script>
   <script src="twisty.js/twisty.js"></script>
   <script src="twisty.js/alg/alg_jison.js"></script>
@@ -34,26 +40,29 @@
 
   <div id="toast" style="display:none;">Message.</div>
 
-  <div id="display-wrapper" data-ng-class="{'fullscreen': view.fullscreen, 'algDelayed': algDelayed || setupDelayed, 'invalid': algStatus == 'invalid' || setupStatus == 'invalid'}">
+  <div id="display-wrapper"
+       data-ng-class="{'fullscreen': view.fullscreen, 'algDelayed': algDelayed || setupDelayed, 'invalid': algStatus == 'invalid' || setupStatus == 'invalid'}">
 
-    <div
-      id="viewer"
-    >
-    </div><div id="controls">
-      <button class="control" id="cycleView" title="Change View" data-ng-click="nextView()">
+    <div id="viewer">
+    </div>
+    <!--控制工具栏-->
+    <div id="controls">
+      <button class="control" id="cycleView" title="切换视角" data-ng-click="nextView()">
         <i class="fa fa-cube"></i>
-      </button><button class="control" id="reset" title="Reset">
+      </button><button class="control" id="reset" title="重头开始">
         <i class="fa fa-fast-backward"></i>
-      </button><button class="control" id="back" title="Back (1 move)">
+      </button><button class="control" id="back" title="撤销一步转动">
         <i class="fa fa-mail-reply"></i>
-      </button><button class="control" id="play" title="Play">
+      </button><button class="control" id="play" title="播放">
         <i class="fa fa-play" data-ng-show="!animating"></i><i class="fa fa-pause" data-ng-show="animating"></i>
-      </button><button class="control" id="forward" title="Step forward (1 move)">
+      </button><button class="control" id="forward" title="执行一步转动">
         <i class="fa fa-mail-forward"></i>
-      </button><button class="control" id="skip" title="Skip to End">
+      </button><button class="control" id="skip" title="跳到结尾">
         <i class="fa fa-fast-forward"></i>
       </button>
-    </div><div id="progress">
+    </div>
+    <!--//进度条部分-->
+    <div id="progress">
       <input
         id="currentMove"
         data-ng-model="current_move"
@@ -66,20 +75,33 @@
 
   </div><div id="info-wrapper" data-ng-show="view.infoPane">
     <div id="info">
+      <div>
+        <h2>这个小工具可以帮你把还原解法转换为可视化的影片，他的使用非常简单，在打乱中输入打乱公式后在解法文本框中写下你的解法即可。你也可以点击旁边的按钮来查看我们为您写好的一个实例</h2>
+        <div class="section buttons" id="examples">
+          <button type="button" class="btn btn-default" href="" data-ng-click="demo('mats-5.55');">实例1</button>
+          <button type="button" class="btn btn-default"  href="" data-ng-click="demo('T-Perm');">实例2</button>
+        </div>
+      </div>
 
-      <h1>
-        <textarea
-          id="title"
-          data-msd-elastic
-          data-ng-trim="false"
-          data-ng-model="title"
-          placeholder="alg.cubing.net [beta]"
-          data-debounce="200"
-        ></textarea>
-      </h1>
+      <h2>设置</h2>
+      <div class="section">
+        <select data-ng-model="puzzle" data-ng-options="p.name group by p.group for p in puzzle_list"></select>
+        <select data-ng-model="stage" data-ng-options="s.name group by s.group for s in stage_list" data-ng-disabled="puzzle.name != '3x3x3'"></select>
+        <select data-ng-model="type" data-ng-options="a.name group by a.group for a in type_list"></select>配色:
+        <select data-ng-model="scheme" data-ng-options="s.name for s in scheme_list"></select>
+        <input class="current_scheme ng-pristine ng-valid ng-hide" type="text" data-ng-model="custom_scheme" data-ng-show="scheme.custom" data-ng-value="scheme.scheme" value="grobyw">
+        <input class="current_scheme" type="text" data-ng-show="!scheme.custom" data-ng-readonly="true" data-ng-value="scheme.scheme" value="grobyw" readonly="readonly">
+        <br>
+        播放速度:
+        <input type="range" min="0.1" max="6" step="0.1" style="vertical-align: middle;" data-ng-model="speed"> (<span data-ng-bind="speed">1</span>x)
+        <input id="hint_stickers" type="checkbox" data-ng-model="hint_stickers" /> <label for="hint_stickers">反射面</label>
+        <input id="hollow" type="checkbox" data-ng-model="hollow" /> <label for="hollow">透明底</label>
+      </div>
+
 
       <div data-ng-show="!(view.id == 'playback' && setup == '')">
-        <h2 data-ng-bind="type.setup">Setup</h2>
+
+        <h2 data-ng-bind="type.setup">打乱</h2>
         <textarea
           id="setup"
           class="moves"
@@ -88,7 +110,7 @@
           data-ng-class="[setupStatus]"
           data-ng-class="{'invalid': !setupValid, 'hoverHighlight': view.highlightMoveFields}"
           data-msd-elastic
-          placeholder="[Click here to add {{type.setup_moves}}.]"
+          placeholder="[在此输入打乱，可以直接复制计时器中的打乱。例如：L2 F' U2 B F2 L2 B2 F' R2 D' R U' F' L U' F D2 L F2]"
           data-debounce="1000"
           data-debounce-callback="setupDebounce"
           style="height: 2em;"
@@ -96,30 +118,75 @@
       </div>
 
       <div>
-        <h2><span data-ng-bind="type.alg">Algorithm</span><span title="h = obtm, q = obqtm, s = btm, e = etm" id="metrics">
+        <h2><span data-ng-bind="type.alg">解法</span>
+          <span title="h = obtm, q = obqtm, s = btm, e = etm" id="metrics">
                 (<span data-ng-bind="obtm">0</span>h,
                 <span data-ng-bind="obqtm">0</span>q,
                 <span data-ng-bind="btm">0</span>s,
                 <span data-ng-bind="etm">0</span>e)
-              </span></h2>
+              </span>
+        </h2>
         <div id="algorithm_wrapper">
         <div id="algorithm_shadow" class="moves"><span id="start">
           </span><span id="middle" class="highlight" style="display: none;">
           </span></div>
-        <textarea
-          id="algorithm"
-          class="moves"
-          data-ng-model="alg"
-          data-ng-trim="false"
-          data-ng-class="[algStatus]"
-          data-ng-class="{'hoverHighlight': view.highlightMoveFields}"
-          data-msd-elastic
-          placeholder="[Click here to add {{type.alg_moves}}.]"
-          autofocus
-          data-debounce="1000"
-          data-debounce-callback="algDebounce"
-          style="height: 2em;"
-        ></textarea>
+        <!--<textarea class="form-control" rows="4"-->
+          <div>
+            <div class="btn-group-sm" role="group" aria-label="input-button">
+              <button type="button" class="btn btn-default" >U </button>
+              <button type="button" class="btn btn-default" >D </button>
+              <button type="button" class="btn btn-default" >R </button>
+              <button type="button" class="btn btn-default" >L </button>
+              <button type="button" class="btn btn-default" >F </button>
+              <button type="button" class="btn btn-default" style="margin-right: 30px">B </button>
+              <button type="button" class="btn btn-default" >X </button>
+              <button type="button" class="btn btn-default" >Y </button>
+              <button type="button" class="btn btn-default" style="margin-right: 10px">Z </button>
+              <button type="button" class="btn btn-default">// </button>
+              <button type="button" class="btn btn-default">Cross</button>
+              <button type="button" class="btn btn-default">F2L</button>
+              <button type="button" class="btn btn-default">OLL</button>
+              <button type="button" class="btn btn-default">PLL</button>
+              <button type="button" class="btn btn-default">Skip</button>
+            </div>
+          <div class="btn-group-sm" role="group" aria-label="input-button">
+            <button type="button" class="btn btn-default" >U'</button>
+            <button type="button" class="btn btn-default" >D'</button>
+            <button type="button" class="btn btn-default" >R'</button>
+            <button type="button" class="btn btn-default" >L'</button>
+            <button type="button" class="btn btn-default" >F'</button>
+            <button type="button" class="btn btn-default" style="margin-right: 20px">B'</button>
+            <button type="button" class="btn btn-default" >X'</button>
+            <button type="button" class="btn btn-default" >Y'</button>
+            <button type="button" class="btn btn-default" style="margin-right: 10px">Z'</button>
+            <button type="button" class="btn btn-default">'</button>
+            <button type="button" class="btn btn-default">Xcross</button>
+            <button type="button" class="btn btn-default">1st</button>
+            <button type="button" class="btn btn-default">2nd</button>
+            <button type="button" class="btn btn-default">3rd</button>
+            <button type="button" class="btn btn-default">4th</button>
+          </div>
+
+
+            <br>
+            <textarea
+                    id="algorithm"
+                    class="moves"
+                    data-ng-model="alg"
+                    data-ng-trim="false"
+                    data-ng-class="[algStatus]"
+                    data-ng-class="{'hoverHighlight': view.highlightMoveFields}"
+                    data-msd-elastic
+                    placeholder="[在此输入解法或者公式，提示使用//可以插入注释]"
+                    autofocus
+                    data-debounce="1000"
+                    data-debounce-callback="algDebounce"
+                    >
+        </textarea>
+          </div>
+
+
+
         </div>
 
       </div>
@@ -127,53 +194,33 @@
 
         <div>
 
-          <h2>Settings</h2>
-          <div class="section">
-            <select data-ng-model="puzzle" data-ng-options="p.name group by p.group for p in puzzle_list"></select>
-            <select data-ng-model="stage" data-ng-options="s.name group by s.group for s in stage_list" data-ng-disabled="puzzle.name != '3x3x3'"></select>
-            <select data-ng-model="type" data-ng-options="a.name group by a.group for a in type_list"></select>
-            <br>
-            Color Scheme:
-            <select data-ng-model="scheme" data-ng-options="s.name for s in scheme_list"></select>
 
-
-          </div>
 
           <div>
-            <h2>Playback Options</h2>
-            <div class="section">
-              Speed: <input type="range" min="0.1" max="6" step="0.1" style="vertical-align: middle;" data-ng-model="speed"> (<span data-ng-bind="speed">1</span>x)<br>
-              <input id="hint_stickers" type="checkbox" data-ng-model="hint_stickers" /> <label for="hint_stickers">Hint Stickers</label>
-              <input id="hollow" type="checkbox" data-ng-model="hollow" /> <label for="hollow">Hollow</label>
-            </div>
-          </div>
-
-          <div>
-            <h2>Tools</h2>
+            <h2>工具</h2>
             <div class="section buttons" id="tools">
-              <button data-ng-click="expand();">Expand</button><button
-                data-ng-click="simplify();">Simplify</button><br><button
-                data-ng-click="clear();"><i class="fa fa-square-o"></i> Clear</button><button
-                data-ng-click="reset();"><i class="fa fa-power-off"></i> Reset</button><br><button
-                data-ng-click="mirrorAcrossM();" title="Mirror across M"><i class="fa fa-arrows-h"></i> Mirror (M)</button><button
-                data-ng-click="mirrorAcrossS();" title="Mirror across S"><i class="fa fa-expand"></i> Mirror (S)</button><br><button
-                data-ng-click="invert();"><i class="fa fa-backward"></i> Invert</button><button
-                data-ng-click="removeComments();">Remove Comments</button><br><button
-                data-ng-click="image();"><i class="fa fa-image"></i> Image</button><button
-                data-ng-click="toggleServiceWorker();"><i class="fa {{serviceWorkerIcon}}"></i> Offline</button>
-              <center><div id="canvasPNG"></div></center>
+
+              <!--<button data-ng-click="reset();"><i class="fa fa-power-off"></i>Reset</button><br>-->
+              <!--<button data-ng-click="mirrorAcrossM();" title="Mirror across M"><i class="fa fa-arrows-h"></i> Mirror (M)</button>-->
+              <!--<button data-ng-click="mirrorAcrossS();" title="Mirror across S"><i class="fa fa-expand"></i> Mirror (S)</button>-->
+              <!--<button data-ng-click="invert();"><i class="fa fa-backward"></i>上一步</button>-->
+              <!--<button data-ng-click="image();"><i class="fa fa-image"></i>转化为图片</button>-->
+              <div class="btn-group-lg" role="group">
+                <button type="button" class="btn btn-default" data-ng-click="expand();">Expand</button>
+                <button type="button" class="btn btn-default" data-ng-click="simplify();">Simplify</button>
+                <button type="button" class="btn btn-default"  data-ng-click="clear();">Clear</button>
+                <button type="button" class="btn btn-default"  data-ng-click="reset();">Reset</button>
+                <br>
+                <button type="button" class="btn btn-default" data-ng-click="mirrorAcrossM();"><i class="fa fa-arrows-h"></i> Mirror (M)</button>
+                <button type="button" class="btn btn-default" data-ng-click="mirrorAcrossS();"><i class="fa fa-expand"></i> Mirror (S)</button>
+                <button type="button" class="btn btn-default"  data-ng-click="invert();"><i class="fa fa-backward"></i>上一步</button>
+                <button type="button" class="btn btn-default"  data-ng-click="image();">>转化为图片</button>
+                <button type="button" class="btn btn-default">复制解法到剪切板</button>
+              </div>
+
+              <right><div id="canvasPNG"></div></right>
             </div>
           </div>
-
-          <h2>Examples</h2>
-          <div class="section buttons" id="examples">
-            <button href="" data-ng-click="demo('mats-5.55');">WR
-            </button><button href="" data-ng-click="demo('T-Perm');">T
-            </button><button href="" data-ng-click="demo('Sune');">Sune
-            </button><button href="" data-ng-click="demo('notation');">Notation
-            </button>
-          </div>
-
 
         </div>
       </div>

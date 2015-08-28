@@ -86,42 +86,44 @@ html, textarea {
   cursor: context-menu;
 }
 
-#info button {
-  -webkit-appearance: none;
-  background: rgba(255, 250, 245, 1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  font-size: 1em;
-  padding: 0.4em 0.6em;
-  width: 8em;
-  white-space: nowrap;
-  margin: 0.2em;
-}
+/*#info button {*/
+  /*-webkit-appearance: none;*/
+  /*background: rgba(255, 250, 245, 1);*/
+  /*border: 1px solid rgba(0, 0, 0, 0.2);*/
+  /*font-size: 1em;*/
+  /*padding: 0.4em 0.6em;*/
+  /*width: 8em;*/
+  /*white-space: nowrap;*/
+  /*margin: 0.2em;*/
+/*}*/
 
 #info .section.buttons, #info .section#share {
-  padding: 0;
+  padding: 0px;
 }
 
 #info .section.buttons button {
-  margin: 0;
+  margin-top: 5px;
 }
 
-#info        #tools.section.buttons button {width: 50%;}
+/*   ∞¥º¸≥ﬂ¥Á≈‰÷√*/
+
+#info        #tools.section.buttons button {width: 20%;}
 #info     #examples.section.buttons button {width: 16.66666%;}
 #info #info-section.section.buttons button {width: 25%;}
 
 
-#info select:hover, #info button:hover {
-  background: rgba(255, 127, 0, 0.3);
-  border: 1px solid #888;
-  /*box-shadow: 0px 0px 2px rgba(255, 127, 0, 1);*/
-  color: #840;
-  cursor: pointer;
-}
+/*#info select:hover, #info button:hover {*/
+  /*background: rgba(255, 127, 0, 0.3);*/
+  /*border: 1px solid #888;*/
+  /*/!*box-shadow: 0px 0px 2px rgba(255, 127, 0, 1);*!/*/
+  /*color: #840;*/
+  /*cursor: pointer;*/
+/*}*/
 
-#info select:active, #info button:active {
-  background: rgb(255, 255, 255);
-  border: 1px solid #888;
-}
+/*#info select:active, #info button:active {*/
+  /*background: rgb(255, 255, 255);*/
+  /*border: 1px solid #888;*/
+/*}*/
 
 .section {
   line-height: 2em;
@@ -260,13 +262,13 @@ input.current_scheme[readonly] {
   border: none;
 
   /* Slimming/Fading Effect */
-  background: linear-gradient(
-    90deg,
-    rgba(127, 127, 127,0) 0%,
-    rgba(127, 127, 127,1) 50%,
-    rgba(127, 127, 127,0) 100%
-  );
-}*/
+  /*background: linear-gradient(*/
+    /*90deg,*/
+    /*rgba(127, 127, 127,0) 0%,*/
+    /*rgba(127, 127, 127,1) 50%,*/
+    /*rgba(127, 127, 127,0) 100%*/
+  /*);*/
+/*}*!/*/
 
 #canvasPNG {
   text-align: center;
