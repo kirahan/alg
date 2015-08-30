@@ -245,6 +245,25 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
       $("#canvasPNG").fadeTo("slow", 1);
   }
 
+  //$scope.gif = function() {
+  //  //    var gif = new GIF({
+  //    //  workers: 2,
+  //    //  quality: 20,      //pixel sample interval, lower is better
+  //    //  width: 600,
+  //    //  height: 800,
+  //    //  transparent: null,
+  //    //  workerScript: '/lib/gif/gif.worker.js'
+  //    //});
+  //    //gif.addFrame($("#viewer>canvas"), {delay: 200});
+  //    //
+  //    //gif.on('finished', function(blob) {
+  //    //  window.open(URL.createObjectURL(blob));
+  //    //});
+  //    //
+  //    //gif.render();
+  //    //
+  //}
+
   function escape_alg(alg) {
     if (!alg) {return alg;}
     var escaped = alg;
