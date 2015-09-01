@@ -155,39 +155,74 @@
           <!--这里是按钮组-->
           <div id="input-button-group" style="display: none;">
             <div class="btn-group-sm" role="group" aria-label="input-button">
-              <button type="button" class="btn btn-default" >U </button>
-              <button type="button" class="btn btn-default" >D </button>
-              <button type="button" class="btn btn-default" >R </button>
-              <button type="button" class="btn btn-default" >L </button>
-              <button type="button" class="btn btn-default" >F </button>
-              <button type="button" class="btn btn-default" style="margin-right: 30px">B </button>
-              <button type="button" class="btn btn-default" >X </button>
-              <button type="button" class="btn btn-default" >Y </button>
-              <button type="button" class="btn btn-default" style="margin-right: 10px">Z </button>
-              <button type="button" class="btn btn-default">// </button>
-              <button type="button" class="btn btn-default">Cross</button>
-              <button type="button" class="btn btn-default">F2L</button>
-              <button type="button" class="btn btn-default">OLL</button>
-              <button type="button" class="btn btn-default">PLL</button>
-              <button type="button" class="btn btn-default">Skip</button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','U ');">U </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','D ');">D </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','R ');">R </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','L ');">L </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','F ');">F </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','B ');"style="margin-right: 30px">B </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','x ');">x </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','y ');">y </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','z ');"style="margin-right: 10px">z </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','// ');">// </button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','Cross ');">Cross</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','F2L ');">F2L</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','OLL ');">OLL</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','PLL ');">PLL</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','Skip ');">Skip</button>
+            </div>
+            <!-- 前面几个带‘的需要转移字符，注意！-->
+            <div class="btn-group-sm" role="group" aria-label="input-button">
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","U&apos; "); '>U' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","D&apos; "); '>D' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","R&apos; "); '>R' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","L&apos; "); '>L' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","F&apos; "); '>F' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","B&apos; "); 'style="margin-right: 30px">B' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","x&apos; "); '>x' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","y&apos; "); '>y' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","z&apos; "); 'style="margin-right: 10px">z' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","&apos; "); '>'</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','Xcross ');">Xcross</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','1st ');">1st</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','2nd ');">2nd</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','3rd ');">3rd</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','4th ');">4th</button>
             </div>
             <div class="btn-group-sm" role="group" aria-label="input-button">
-              <button type="button" class="btn btn-default" >U'</button>
-              <button type="button" class="btn btn-default" >D'</button>
-              <button type="button" class="btn btn-default" >R'</button>
-              <button type="button" class="btn btn-default" >L'</button>
-              <button type="button" class="btn btn-default" >F'</button>
-              <button type="button" class="btn btn-default" style="margin-right: 20px">B'</button>
-              <button type="button" class="btn btn-default" >X'</button>
-              <button type="button" class="btn btn-default" >Y'</button>
-              <button type="button" class="btn btn-default" style="margin-right: 10px">Z'</button>
-              <button type="button" class="btn btn-default">'</button>
-              <button type="button" class="btn btn-default">Xcross</button>
-              <button type="button" class="btn btn-default">1st</button>
-              <button type="button" class="btn btn-default">2nd</button>
-              <button type="button" class="btn btn-default">3rd</button>
-              <button type="button" class="btn btn-default">4th</button>
+              <button type="button" class="btn btn-default singleWordFormula"   data-ng-click="insert_string_into_textarea('algorithm','u ');">u </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','d ');">d </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','r ');">r </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','l ');">l </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','f ');">f </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','b ');"style="margin-right: 30px">b </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','M ');">M </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","M&apos; ");'>M' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','2 ');"style="margin-right: 10px">2 </button>
+              <button type="button" class="btn btn-default singleWordFormula " data-ng-click="insert_string_into_textarea('algorithm','( ');">( </button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RUR&apos;U&apos; ");'>RUR'U'</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RU&apos;R&apos;U ");'>RU'R'U</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","R&apos;URU&apos; ");'>R'URU'</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RU&apos;R ");'>RU'R</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","R&apos;UR ");'>R'UR</button>
             </div>
+            <!-- 前面几个带‘的需要转移字符，注意！-->
+            <div class="btn-group-sm" role="group" aria-label="input-button">
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","u&apos; "); '>u' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","d&apos; "); '>d' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","r&apos; "); '>r' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","l&apos; "); '>l' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","f&apos; "); '>f' </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","b&apos; "); 'style="margin-right: 30px">b' </button>
+              <button type="button" class="btn btn-default doubleWordFormula" onclick="$('#algorithm').val(''); ">清空 </button>
+
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","z&apos; "); 'style="margin-right: 10px">复制 </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm",")"); '>)</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RU&apos;U&apos; ");'>RU'U'</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","R&apos;U2 ");'>R'U2</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RUR&apos; ");'>RUR'</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","URU&apos;R&apos; ");'>URU'R'</button>
+              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","UR&apos;U&apos;R ");'>UR'U'R</button>
           </div>
 
 
