@@ -24,6 +24,9 @@
   <script src="lib/gif/gif.js"></script>
   <script src="lib/gif/gif.worker.js"></script>
   <script src="lib/bootstrap/bootstrap.min.js"></script>
+  <script src="lib/ZeroClipboard/jquery.zclip.min.js"></script>
+
+
   <script src="twisty.js/lib/Three.js"></script>
   <script src="twisty.js/twisty.js"></script>
   <script src="twisty.js/alg/alg_jison.js"></script>
@@ -40,7 +43,23 @@
 </head>
 <body>
 
-  <div id="toast" style="display:none;">Message.</div>
+  <!--<div id="toast" style="display:none;">
+  </div>
+  -->
+  <div  id="copy_alert" style="display:none;">
+      <div><h2>解法信息</h2></div>
+
+        <div class="form-group" id="p_Clipboard">
+        </div>
+
+    <div>
+      <button type="button" class="btn btn-default" onclick="$('#copy_alert').hide()">确定</button>
+    </div>
+
+
+
+  </div>
+
 
   <div id="display-wrapper"
        data-ng-class="{'fullscreen': view.fullscreen, 'algDelayed': algDelayed || setupDelayed, 'invalid': algStatus == 'invalid' || setupStatus == 'invalid'}">
@@ -214,9 +233,9 @@
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","l&apos; "); '>l' </button>
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","f&apos; "); '>f' </button>
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","b&apos; "); 'style="margin-right: 30px">b' </button>
-              <button type="button" class="btn btn-default doubleWordFormula" onclick="$('#algorithm').val(''); ">清空 </button>
+              <button type="button" style="margin-right: 10px" class="btn btn-default forthWordFormula" onclick="$('#algorithm').val(''); ">清空 </button>
 
-              <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","z&apos; "); 'style="margin-right: 10px">复制 </button>
+              <!--<button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","z&apos; "); 'style="margin-right: 10px">复制 </button>-->
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm",")"); '>)</button>
               <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RU&apos;U&apos; ");'>RU'U'</button>
               <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","R&apos;U2 ");'>R'U2</button>
@@ -230,34 +249,29 @@
       </div>
       <div data-ng-show="view.extraControls">
 
-        <div>
+
 
 
 
           <div>
             <h2>工具</h2>
             <div class="section buttons" id="tools">
-
-              <!--<button data-ng-click="reset();"><i class="fa fa-power-off"></i>Reset</button><br>-->
-              <!--<button data-ng-click="mirrorAcrossM();" title="Mirror across M"><i class="fa fa-arrows-h"></i> Mirror (M)</button>-->
-              <!--<button data-ng-click="mirrorAcrossS();" title="Mirror across S"><i class="fa fa-expand"></i> Mirror (S)</button>-->
-              <!--<button data-ng-click="invert();"><i class="fa fa-backward"></i>上一步</button>-->
-              <!--<button data-ng-click="image();"><i class="fa fa-image"></i>转化为图片</button>-->
               <div class="btn-group-lg" role="group">
-                <button type="button" class="btn btn-default" data-ng-click="expand();">Expand</button>
-                <button type="button" class="btn btn-default" data-ng-click="simplify();">Simplify</button>
-                <button type="button" class="btn btn-default"  data-ng-click="clear();">Clear</button>
-                <button type="button" class="btn btn-default"  data-ng-click="reset();">Reset</button>
+                <!--<button type="button" class="btn btn-default" data-ng-click="expand();">Expand</button>-->
+                <button type="button" class="btn btn-default" data-ng-click="simplify();">消除多余步骤</button>
+                <button type="button" class="btn btn-default"  data-ng-click="clear();">清空</button>
+                <button type="button" class="btn btn-default"  data-ng-click="reset();">重置</button>
+                <!--<button  id="copy_button" type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">分享解法</button>-->
+                <button  id="copy_button" type="button" class="btn btn-default" onclick="$('#copy_alert').show();">分享解法</button>
                 <br>
-                <button type="button" class="btn btn-default" data-ng-click="mirrorAcrossM();"><i class="fa fa-arrows-h"></i> Mirror (M)</button>
-                <button type="button" class="btn btn-default" data-ng-click="mirrorAcrossS();"><i class="fa fa-expand"></i> Mirror (S)</button>
-                <button type="button" class="btn btn-default"  data-ng-click="invert();"><i class="fa fa-backward"></i>上一步</button>
+                <button type="button" class="btn btn-default" data-ng-click="mirrorAcrossM();"><i class="fa fa-arrows-h"></i> 镜像 (M)</button>
+                <button type="button" class="btn btn-default" data-ng-click="mirrorAcrossS();"><i class="fa fa-expand"></i> 镜像(S)</button>
+                <!--<button type="button" class="btn btn-default"  data-ng-click="invert();"><i class="fa fa-backward"></i>上一步</button>-->
                 <button type="button" class="btn btn-default"  data-ng-click="image();">>转化图片</button>
-                <!--<button type="button" class="btn btn-default" data-ng-click="gif();">复制解法到剪切板</button>-->
+                <button type="button" class="btn btn-default" disabled data-ng-click="gif();">>转化gif动画</button>
               </div>
-
               <right><div id="canvasPNG"></div></right>
-            </div>
+              </div>
           </div>
 
         </div>

@@ -296,9 +296,41 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     //}
   }
 
-  //function insert_string_into_textarea (textarea,string) {
-  //  $("#"+textarea).insertContent(string);
-  //}
+ $(document).ready(function(){
+
+   $("#copy_button").click(function()
+       {
+         $("#p_Clipboard").empty();
+         var $title_info = "<textarea id='copy_text'  rows='16'   style='width:90%; padding-left:10px; padding-right: 10px; resize: none' readonly>本次解法由zhtimer生成:\n"
+         var $scramble_info = "打乱:\n"+$("#setup").val()+"\n";
+         var $algorithm_info = "解法:\n" +$("#algorithm").val()+"\n";
+         //window.location.href
+
+         var baidu_shortURL = 'http://baidu.nu/index.php?m=Index&a=create';
+
+
+         $.post(baidu_shortURL,
+             {url: 'http://v3.bootcss.com/css/#forms' },
+             function(data,status){
+               data = eval(data);
+               alert(data);
+         },"json");
+
+
+         var $link_info = "点击下面链接查看演示动画\n" + tinyurl_result + "\r\n</textarea>";
+
+
+
+         var $whole_info = $title_info + $scramble_info + $algorithm_info + $link_info;
+
+         $("#p_Clipboard").append($whole_info);
+
+         $("#copy_text").select();
+           })
+     })
+
+
+
 
 
   //$scope.gif = function() {
@@ -751,13 +783,13 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
     "mats-5.55": {
       puzzle: $scope.puzzle_map["3x3x3"],
       type: $scope.type_map["reconstruction"],
-      title: "Mats Valk, 5.55 WR",
+      //title: "Mats Valk, 5.55 WR",
       setup: "D2 U' R2 U F2 D2 U' R2 U' B' L2 R' B' D2 U B2 L' D' R2",
       alg: "x y' // inspection\nF R D L F // cross\nU R U' R' d R' U R // 1st pair\ny U2' R' U' R // 2nd pair\nU L U' L' d R U' R' // 3rd pair\ny' U' R U R' U R U' R' // 4th pair (OLS)\nR2' U' R' U' R U R U R U' R U2' // PLL"
     },
     "T-Perm": {
       type: $scope.type_map["alg"],
-      title: "T-Perm",
+      //title: "T-Perm",
       setup: "",
       alg: "R U R' U' R' F R2 U' R' U' R U R' F'"
     },

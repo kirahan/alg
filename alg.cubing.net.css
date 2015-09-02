@@ -119,6 +119,11 @@ html, textarea {
 {
   width:7.7%;
 }
+
+.forthWordFormula{
+
+  width:15.8%;
+}
 .section {
   line-height: 2em;
   padding: 10px 20px;
@@ -285,6 +290,28 @@ textarea.sharetext {
 
 .sharetext:hover {
   background: #fff;
+}
+
+
+#p_Clipboard{
+
+
+}
+
+#copy_alert{
+  /*left: 20%; right: 20%; top: 20%; bottom: 20%;"*/
+  /*display: flex;*/
+  border-radius: 12px;
+  z-index: 1000;
+  color: black;
+  background: grey;
+
+  width: 50%;
+  height: 50%;
+  left: 20%;
+  top: 20%;
+  position: absolute;
+  text-align: center;
 }
 
 #toast {
