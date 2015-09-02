@@ -301,23 +301,38 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
    $("#copy_button").click(function()
        {
          $("#p_Clipboard").empty();
-         var $title_info = "<textarea id='copy_text'  rows='16'   style='width:90%; padding-left:10px; padding-right: 10px; resize: none' readonly>本次解法由zhtimer生成:\n"
+         var $title_info = "<textarea id='copy_text'  rows='20'   style='width:90%; padding-left:10px; padding-right: 10px; resize: none' >本次解法由zhtimer生成:\n"
          var $scramble_info = "打乱:\n"+$("#setup").val()+"\n";
          var $algorithm_info = "解法:\n" +$("#algorithm").val()+"\n";
          //window.location.href
-
-         var baidu_shortURL = 'http://baidu.nu/index.php?m=Index&a=create';
-
-
-         $.post(baidu_shortURL,
-             {url: 'http://v3.bootcss.com/css/#forms' },
-             function(data,status){
-               data = eval(data);
-               alert(data);
-         },"json");
+         //var app_key = '1535932388';
+         //var long_url = 'http://v3.bootcss.com/css/#forms';
+         //var sina_shortURL = 'http://api.weibo.com/2/short_url/shorten.json?source='+ app_key + '&url_long=' + long_url;
 
 
-         var $link_info = "点击下面链接查看演示动画\n" + tinyurl_result + "\r\n</textarea>";
+       //  $.getJSON('http://example.com/data.php?callback=?,function(jsondata)'){
+       //  //处理获得的json数据
+       //};
+       //  $.ajax({
+       //    type: "GET",//jquery 请求方式为 get
+       //    url: sina_shortURL,//jquery 请求URL
+       //    dataType: "JSON",//jquery接受返回数据类型 可以 json js html 等数
+       //    //fail:function(data){
+       //    //  console.log(data.data.urls[0].url_short);
+       //    //},
+       //    error: function(){
+       //      console.log(data.data.urls[0].url_short);
+       //      },
+       //    success: function(data) {
+       //      //jquery请求成功返回数据
+       //      console.log(data.data.urls[0].url_short);
+       //    }
+       //  });
+
+
+
+
+         var $link_info = "点击下面链接查看演示动画\n" + window.location.href + "\r\n</textarea>";
 
 
 
@@ -327,7 +342,17 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
 
          $("#copy_text").select();
            })
-     })
+
+
+   $("#get_tinyurl_btn").click(function()
+   {
+         $('#tinyurl').toggle();
+          var tiny_api = 'http://api.weibo.com/2/short_url/shorten.json?source=1535932388&url_long=' + window.location.href;
+         $('#tinyurl').attr('src',tiny_api)
+   })
+
+     }
+ );
 
 
 
