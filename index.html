@@ -218,7 +218,7 @@
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','b ');"style="margin-right: 30px">b </button>
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','M ');">M </button>
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","M&apos; ");'>M' </button>
-              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_string_into_textarea('algorithm','2 ');"style="margin-right: 10px">2 </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_2orquotation_mark_into_textarea('algorithm','2 ');"style="margin-right: 10px">2 </button>
               <button type="button" class="btn btn-default singleWordFormula " data-ng-click="insert_string_into_textarea('algorithm','( ');">( </button>
               <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RUR&apos;U&apos; ");'>RUR'U'</button>
               <button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","RU&apos;R&apos;U ");'>RU'R'U</button>
@@ -234,7 +234,10 @@
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","l&apos; "); '>l' </button>
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","f&apos; "); '>f' </button>
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","b&apos; "); 'style="margin-right: 30px">b' </button>
-              <button type="button" style="margin-right: 10px" class="btn btn-default forthWordFormula" onclick="$('#algorithm').val(''); ">清空 </button>
+
+              <button type="button" class="btn btn-default singleWordFormula" onclick="$('#algorithm').val(''); ">清空 </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_2orquotation_mark_into_textarea('algorithm','');">删除 </button>
+              <button type="button" class="btn btn-default singleWordFormula" data-ng-click="insert_2orquotation_mark_into_textarea('algorithm','\n');">换行 </button>
 
               <!--<button type="button" class="btn btn-default doubleWordFormula" data-ng-click='insert_string_into_textarea("algorithm","z&apos; "); 'style="margin-right: 10px">复制 </button>-->
               <button type="button" class="btn btn-default singleWordFormula" data-ng-click='insert_string_into_textarea("algorithm",")"); '>)</button>

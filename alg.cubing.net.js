@@ -267,7 +267,7 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
       }
     } else if ($t.selectionStart || $t.selectionStart == '0') {
       var startPos = $t.selectionStart;
-
+      startPos = startPos - t;
       var endPos = $t.selectionEnd;
       var scrollTop = $t.scrollTop;
       $t.value = $t.value.substring(0, startPos) + myValue + $t.value.substring(endPos, $t.value.length);
@@ -275,11 +275,11 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
       $t.selectionStart = startPos + myValue.length;
       $t.selectionEnd = startPos + myValue.length;
       $t.scrollTop = scrollTop;
-      if (arguments.length == 2) {
-
-        $t.setSelectionRange(startPos - t, $t.selectionEnd + t);
-        this.focus();
-      }
+      //if (arguments.length == 2) {
+      //
+      //  $t.setSelectionRange(startPos - t, $t.selectionEnd + t);
+      //  this.focus();
+      //}
     }
     else {
       this.value += myValue;
@@ -288,7 +288,16 @@ algxControllers.controller('algxController', ["$scope", "$location", "debounce",
   }
 
   $scope.insert_string_into_textarea = function (textarea,string) {
-    $("#"+textarea).insertContent(string);
+    $("#"+textarea).insertContent(string,0);
+    $("#"+textarea).focus();
+    //var alg_value = "{alg:" + $("#"+textarea).value  +"}" ;
+    //for (i in alg_value) {
+    //  $scope[i] = alg_value[i];
+    //}
+  }
+
+  $scope.insert_2orquotation_mark_into_textarea = function (textarea,string) {
+    $("#"+textarea).insertContent(string,1);
     $("#"+textarea).focus();
     //var alg_value = "{alg:" + $("#"+textarea).value  +"}" ;
     //for (i in alg_value) {
